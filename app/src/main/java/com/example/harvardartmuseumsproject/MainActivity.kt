@@ -41,7 +41,8 @@ class MainActivity : ComponentActivity() {
                         LevelOneDetailsScreen(navController = navController)
                     }
                     composable("LevelTwoDetailsScreen") {
-                        LevelTwoDetailsScreen(navController = navController)
+                        LevelTwoDetailsScreen(
+                            navController = navController)
                     }
                     composable("LevelThreeDetailsScreen") {
                         LevelThreeDetailsScreen(navController = navController)
