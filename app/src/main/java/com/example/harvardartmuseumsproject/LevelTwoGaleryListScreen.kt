@@ -70,9 +70,8 @@ fun GalleryRow(
                 .padding(4.dp)
                 .fillMaxSize()
         ) {
-            gallery.records.name.let {
-                if (it != null) {
-                    Text(
+            gallery.records?.firstOrNull()?.name?.let {
+            Text(
                         text = it,
                         style = MaterialTheme.typography.body1,
                         fontWeight = FontWeight.Bold
@@ -81,7 +80,6 @@ fun GalleryRow(
             }
         }
     }
-}
 
 @Composable
 fun GalleryList(
@@ -118,13 +116,17 @@ fun ProgressIndicator() {
 
 @Composable
 fun ErrorHandlingMessage() {
-    Text(
-        text = "Oooops, something went wrong",
-        fontSize = 30.sp,
+    Box(
+        contentAlignment = Alignment.Center,
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colors.background)
-    )
+    ) {
+        Text(
+            text = "Oooops, something went wrong",
+            fontSize = 30.sp
+        )
+    }
 }
 
 

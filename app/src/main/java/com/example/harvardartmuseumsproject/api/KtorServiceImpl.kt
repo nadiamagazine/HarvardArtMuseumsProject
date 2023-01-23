@@ -11,9 +11,9 @@ class KtorServiceImplementation(
     private val client: HttpClient
 ) : KtorService {
 
-    override suspend fun getListOfGalleriesOnEachLevel(): List<Gallery> {
+    override suspend fun getListOfGalleriesOnEachLevel(level: Int): List<Gallery> {
         return try {
-            client.get("https://api.harvardartmuseums.org/gallery?floor=2?apikey=ed169f9e-e807-41ff-9da7-f44a69fd184e").body()
+            client.get("https://api.harvardartmuseums.org/gallery?floor=$level&apikey=ed169f9e-e807-41ff-9da7-f44a69fd184e").body()
         } catch (e: RedirectResponseException) {
             // 3xx - responses
             Timber.d("Error: ${e.response.status.description}")
@@ -27,7 +27,7 @@ class KtorServiceImplementation(
             Timber.d("Error: ${e.response.status.description}")
             emptyList()
         } catch (e: Exception) {
-            Timber.d("Error: ${e.message}")
+            Timber.d("Error: ${e.stackTraceToString()}")
             emptyList()
         }
     }
