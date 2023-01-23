@@ -1,14 +1,34 @@
 package com.example.harvardartmuseumsproject
 
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.navigation.NavController
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.harvardartmuseumsproject.viewmodel.LevelOneViewModel
 
 @Composable
 fun LevelOneGalleryListScreen(
-    navController: NavController
-
+    navController: NavController,
+    viewModel: LevelOneViewModel = viewModel()
 ) {
-    Text(text = "Fun staff are coming")
+    val viewState = viewModel.liveData.observeAsState()
 
+    if (viewState.value == null) {
+        ProgressIndicator()
+    } else {
+        Column() {
+            viewState.value?.let {
+                if (it.isNotEmpty()) {
+                    GalleryList(
+                        navController = navController,
+                        listOfGalleries = it
+                    )
+                } else {
+                    ErrorHandlingMessage()
+                }
+
+            }
+        }
+    }
 }

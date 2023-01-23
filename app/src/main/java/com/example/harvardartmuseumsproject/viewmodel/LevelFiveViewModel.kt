@@ -10,7 +10,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class GalleryOfEachLevelViewModel : ViewModel() {
+
+class LevelFiveViewModel : ViewModel() {
 
     private var _liveData = MutableLiveData<List<Gallery>>()
     val liveData: LiveData<List<Gallery>> = _liveData
@@ -21,7 +22,7 @@ class GalleryOfEachLevelViewModel : ViewModel() {
 
     private fun getGallery() = viewModelScope.launch {
         withContext(Dispatchers.IO) {
-            val listOfGalleries = KtorService.create().getListOfGalleriesOnEachLevel(2)
+            val listOfGalleries = KtorService.create().getListOfGalleriesOnEachLevel(5)
             _liveData.postValue(listOfGalleries)
         }
     }

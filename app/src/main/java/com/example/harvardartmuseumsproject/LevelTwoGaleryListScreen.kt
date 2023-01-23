@@ -21,12 +21,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.harvardartmuseumsproject.model.Gallery
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.harvardartmuseumsproject.viewmodel.GalleryOfEachLevelViewModel
+import com.example.harvardartmuseumsproject.viewmodel.LevelTwoViewModel
 
 @Composable
 fun LevelTwoGalleryListScreen(
     navController: NavController,
-    viewModel: GalleryOfEachLevelViewModel = viewModel()
+    viewModel: LevelTwoViewModel = viewModel()
 ) {
     val viewState = viewModel.liveData.observeAsState()
 
