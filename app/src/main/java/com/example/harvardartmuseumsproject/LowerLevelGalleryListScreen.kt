@@ -5,10 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 
 @Composable
-fun LevelThreeDetailsScreen(
+fun LowerLevelGalleryListScreen(
     navController: NavController
-
 ) {
-    Text(text = "Fun staff are coming")
-
+Text(text = "Fun staff are coming")
 }

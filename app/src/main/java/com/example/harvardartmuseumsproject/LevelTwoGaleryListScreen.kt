@@ -24,7 +24,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.harvardartmuseumsproject.viewmodel.GalleryOfEachLevelViewModel
 
 @Composable
-fun LevelTwoDetailsScreen(
+fun LevelTwoGalleryListScreen(
     navController: NavController,
     viewModel: GalleryOfEachLevelViewModel = viewModel()
 ) {

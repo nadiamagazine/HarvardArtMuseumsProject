@@ -33,7 +33,7 @@ fun ExhibitionScreen(
         ) {
             ClickableText(
                 text = AnnotatedString("Lower level"),
-                onClick = { navController.navigate("LowerLevelDetailsScreen") },
+                onClick = { navController.navigate("LowerLevelGalleryListScreen") },
                 modifier = Modifier
                     .padding(20.dp)
 //                style = TextStyle(
@@ -51,7 +51,7 @@ fun ExhibitionScreen(
         ) {
             ClickableText(
                 text = AnnotatedString("Level 1"),
-                onClick = { navController.navigate("LevelOneDetailsScreen") },
+                onClick = { navController.navigate("LevelOneGalleryListScreen") },
                 modifier = Modifier
                     .padding(20.dp)
             )
@@ -64,7 +64,7 @@ fun ExhibitionScreen(
         ) {
             ClickableText(
                 text = AnnotatedString("Level 2"),
-                onClick = { navController.navigate("LevelTwoDetailsScreen") },
+                onClick = { navController.navigate("LevelTwoGalleryListScreen") },
                 modifier = Modifier
                     .padding(20.dp)
             )
@@ -77,7 +77,7 @@ fun ExhibitionScreen(
         ) {
             ClickableText(
                 text = AnnotatedString("Level 3"),
-                onClick = { navController.navigate("LevelThreeDetailsScreen") },
+                onClick = { navController.navigate("LevelThreeGalleryListScreen") },
                 modifier = Modifier
                     .padding(20.dp)
             )
@@ -90,7 +90,7 @@ fun ExhibitionScreen(
         ) {
             ClickableText(
                 text = AnnotatedString("Level 4"),
-                onClick = { navController.navigate("LevelFourDetailsScreen") },
+                onClick = { navController.navigate("LevelFourGalleryListScreen") },
                 modifier = Modifier
                     .padding(20.dp)
             )
@@ -103,7 +103,7 @@ fun ExhibitionScreen(
         ) {
             ClickableText(
                 text = AnnotatedString("Level 5"),
-                onClick = { navController.navigate("LevelFiveDetailsScreen") },
+                onClick = { navController.navigate("LevelFiveGalleryListScreen") },
                 modifier = Modifier
                     .padding(20.dp)
             )
