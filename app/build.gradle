@@ -70,7 +70,7 @@ dependencies {
 
     // ktor-client-serialization
     implementation "io.ktor:ktor-client-serialization:1.6.3"
-   // implementation "io.ktor:ktor-server-content-negotiation:1.6.3"
+    // implementation "io.ktor:ktor-server-content-negotiation:1.6.3"
     implementation "io.ktor:ktor-serialization-kotlinx-json:1.6.3"
 
     // Lifecycle
@@ -90,8 +90,6 @@ dependencies {
 
     // Serialization
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0"
-   // implementation "org.jetbrains.kotlin:kotlin-serialization:1.7.10"
-
 
     // Coil
     implementation "io.coil-kt:coil-compose:2.2.2"

@@ -2,9 +2,11 @@ package com.example.harvardartmuseumsproject
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -15,10 +17,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.harvardartmuseumsproject.model.Gallery
+import com.example.harvardartmuseumsproject.model.Records
 
 @Composable
 fun ExhibitionScreen(
-    navController: NavController
+    navController: NavController,
+    level: Records
 ) {
     Column(
         modifier = Modifier
@@ -33,7 +38,7 @@ fun ExhibitionScreen(
         ) {
             ClickableText(
                 text = AnnotatedString("Lower level"),
-                onClick = { navController.navigate("LowerLevelGalleryListScreen") },
+                onClick = { navController.navigate("EachLevelGalleryListScreen/${level.floor}") },
                 modifier = Modifier
                     .padding(20.dp)
 //                style = TextStyle(
@@ -48,10 +53,10 @@ fun ExhibitionScreen(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(MaterialTheme.colors.surface)
+                .clickable { navController.navigate("EachLevelGalleryListScreen/${level.floor}") }
         ) {
-            ClickableText(
+            Text(
                 text = AnnotatedString("Level 1"),
-                onClick = { navController.navigate("LevelOneGalleryListScreen") },
                 modifier = Modifier
                     .padding(20.dp)
             )
@@ -61,10 +66,11 @@ fun ExhibitionScreen(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(MaterialTheme.colors.surface)
+                .clickable { navController.navigate("EachLevelGalleryListScreen/${level.floor}") }
+
         ) {
-            ClickableText(
+            Text(
                 text = AnnotatedString("Level 2"),
-                onClick = { navController.navigate("LevelTwoGalleryListScreen") },
                 modifier = Modifier
                     .padding(20.dp)
             )
@@ -74,10 +80,11 @@ fun ExhibitionScreen(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(MaterialTheme.colors.surface)
+                .clickable { navController.navigate("EachLevelGalleryListScreen/${level.floor}") }
+
         ) {
-            ClickableText(
+            Text(
                 text = AnnotatedString("Level 3"),
-                onClick = { navController.navigate("LevelThreeGalleryListScreen") },
                 modifier = Modifier
                     .padding(20.dp)
             )
@@ -87,10 +94,11 @@ fun ExhibitionScreen(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(MaterialTheme.colors.surface)
+                .clickable { navController.navigate("EachLevelGalleryListScreen/${level.floor}") }
+
         ) {
-            ClickableText(
+            Text(
                 text = AnnotatedString("Level 4"),
-                onClick = { navController.navigate("LevelFourGalleryListScreen") },
                 modifier = Modifier
                     .padding(20.dp)
             )
@@ -100,10 +108,11 @@ fun ExhibitionScreen(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(MaterialTheme.colors.surface)
+                .clickable { navController.navigate("EachLevelGalleryListScreen/${level.floor}") }
+
         ) {
-            ClickableText(
+            Text(
                 text = AnnotatedString("Level 5"),
-                onClick = { navController.navigate("LevelFiveGalleryListScreen") },
                 modifier = Modifier
                     .padding(20.dp)
             )

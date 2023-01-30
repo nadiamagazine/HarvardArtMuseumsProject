@@ -13,7 +13,7 @@ class KtorServiceImplementation(
 
     override suspend fun getListOfGalleriesOnEachLevel(level: Int): List<Gallery> {
         return try {
-            client.get("https://api.harvardartmuseums.org/gallery?floor=$level&apikey=ed169f9e-e807-41ff-9da7-f44a69fd184e").body()
+            listOf(client.get("https://api.harvardartmuseums.org/gallery?floor=$level&apikey=ed169f9e-e807-41ff-9da7-f44a69fd184e").body())
         } catch (e: RedirectResponseException) {
             // 3xx - responses
             Timber.d("Error: ${e.response.status.description}")
@@ -32,3 +32,4 @@ class KtorServiceImplementation(
         }
     }
 }
+// data model for all api calls
