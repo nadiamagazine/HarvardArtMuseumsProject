@@ -26,8 +26,7 @@ class MainActivity : ComponentActivity() {
                     }
                     composable("ExhibitionScreen") {
                         ExhibitionScreen(
-                            navController = navController,
-                        level = level)
+                            navController = navController)
                     }
                     composable("EachLevelGalleryListScreen/{level}",
                         arguments = listOf(

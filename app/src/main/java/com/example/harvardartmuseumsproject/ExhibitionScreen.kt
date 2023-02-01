@@ -22,8 +22,7 @@ import com.example.harvardartmuseumsproject.model.Records
 
 @Composable
 fun ExhibitionScreen(
-    navController: NavController,
-    level: Records
+    navController: NavController
 ) {
     Column(
         modifier = Modifier
@@ -38,7 +37,7 @@ fun ExhibitionScreen(
         ) {
             ClickableText(
                 text = AnnotatedString("Lower level"),
-                onClick = { navController.navigate("EachLevelGalleryListScreen/${level.floor}") },
+                onClick = { navController.navigate("EachLevelGalleryListScreen") },
                 modifier = Modifier
                     .padding(20.dp)
 //                style = TextStyle(
@@ -53,7 +52,7 @@ fun ExhibitionScreen(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(MaterialTheme.colors.surface)
-                .clickable { navController.navigate("EachLevelGalleryListScreen/${level.floor}") }
+                .clickable { navController.navigate("EachLevelGalleryListScreen") }
         ) {
             Text(
                 text = AnnotatedString("Level 1"),
@@ -66,7 +65,7 @@ fun ExhibitionScreen(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(MaterialTheme.colors.surface)
-                .clickable { navController.navigate("EachLevelGalleryListScreen/${level.floor}") }
+                .clickable { navController.navigate("EachLevelGalleryListScreen") }
 
         ) {
             Text(
@@ -80,7 +79,7 @@ fun ExhibitionScreen(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(MaterialTheme.colors.surface)
-                .clickable { navController.navigate("EachLevelGalleryListScreen/${level.floor}") }
+                .clickable { navController.navigate("EachLevelGalleryListScreen") }
 
         ) {
             Text(
@@ -94,7 +93,7 @@ fun ExhibitionScreen(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(MaterialTheme.colors.surface)
-                .clickable { navController.navigate("EachLevelGalleryListScreen/${level.floor}") }
+                .clickable { navController.navigate("EachLevelGalleryListScreen") }
 
         ) {
             Text(
@@ -108,7 +107,7 @@ fun ExhibitionScreen(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(MaterialTheme.colors.surface)
-                .clickable { navController.navigate("EachLevelGalleryListScreen/${level.floor}") }
+                .clickable { navController.navigate("EachLevelGalleryListScreen") }
 
         ) {
             Text(
