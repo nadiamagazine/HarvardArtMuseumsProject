@@ -24,98 +24,28 @@ import com.example.harvardartmuseumsproject.model.Records
 fun ExhibitionScreen(
     navController: NavController
 ) {
+    val levels = listOf("Lower level", "Level 1", "Level 2", "Level 3", "Level 4", "Level 5")
     Column(
         modifier = Modifier
             .background(MaterialTheme.colors.background)
             .fillMaxSize()
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-                .background(MaterialTheme.colors.surface)
-        ) {
-            ClickableText(
-                text = AnnotatedString("Lower level"),
-                onClick = { navController.navigate("EachLevelGalleryListScreen") },
+        levels.forEachIndexed { index, level ->
+            Row(
                 modifier = Modifier
-                    .padding(20.dp)
-//                style = TextStyle(
-//                    color = Black,
-//                    fontSize = 30.sp,
-//                    fontFamily = FontFamily.Bold
-//                )
-            )
+                    .fillMaxWidth()
+                    .padding(8.dp)
+                    .background(MaterialTheme.colors.surface)
+                    .clickable { navController.navigate("EachLevelGalleryListScreen/$index") }
+            ) {
+                Text(
+                    text = AnnotatedString(level),
+                    modifier = Modifier
+                        .padding(20.dp)
+                )
+            }
         }
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-                .background(MaterialTheme.colors.surface)
-                .clickable { navController.navigate("EachLevelGalleryListScreen") }
-        ) {
-            Text(
-                text = AnnotatedString("Level 1"),
-                modifier = Modifier
-                    .padding(20.dp)
-            )
-        }
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-                .background(MaterialTheme.colors.surface)
-                .clickable { navController.navigate("EachLevelGalleryListScreen") }
 
-        ) {
-            Text(
-                text = AnnotatedString("Level 2"),
-                modifier = Modifier
-                    .padding(20.dp)
-            )
-        }
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-                .background(MaterialTheme.colors.surface)
-                .clickable { navController.navigate("EachLevelGalleryListScreen") }
-
-        ) {
-            Text(
-                text = AnnotatedString("Level 3"),
-                modifier = Modifier
-                    .padding(20.dp)
-            )
-        }
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-                .background(MaterialTheme.colors.surface)
-                .clickable { navController.navigate("EachLevelGalleryListScreen") }
-
-        ) {
-            Text(
-                text = AnnotatedString("Level 4"),
-                modifier = Modifier
-                    .padding(20.dp)
-            )
-        }
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-                .background(MaterialTheme.colors.surface)
-                .clickable { navController.navigate("EachLevelGalleryListScreen") }
-
-        ) {
-            Text(
-                text = AnnotatedString("Level 5"),
-                modifier = Modifier
-                    .padding(20.dp)
-            )
-        }
         Image(
             painter = painterResource(id = R.drawable.harvard_museum_of_natural_history),
             contentDescription = null,
