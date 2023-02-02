@@ -18,15 +18,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import com.example.harvardartmuseumsproject.model.Gallery
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.harvardartmuseumsproject.viewmodel.LevelTwoViewModel
+import com.example.harvardartmuseumsproject.viewmodel.EachLevelViewModel
 
 @Composable
-fun LevelTwoGalleryListScreen(
+fun EachLevelGalleryListScreen(
+    level: Int,
     navController: NavController,
-    viewModel: LevelTwoViewModel = viewModel()
+    viewModel: EachLevelViewModel = viewModel(
+        factory = EachLevelViewModel.factory(level)
+// Instance of the viewMOdel
+              //  viewModel = ViewModelProvider(this, EachLevelViewModel.factory(level)).get(EachLevelViewModel::class.java)
+
+)
 ) {
     val viewState = viewModel.liveData.observeAsState()
 
@@ -128,5 +135,3 @@ fun ErrorHandlingMessage() {
         )
     }
 }
-
-

@@ -9,5 +9,6 @@ data class Gallery(
 
 @Serializable
 data class Records(
-    val name: String?
+    val name: String?,
+    val floor: Int
 )
