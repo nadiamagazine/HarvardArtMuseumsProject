@@ -3,12 +3,12 @@ package com.example.harvardartmuseumsproject.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Gallery(
-    val records: List<Records>?
+data class Galleries(
+    val records: List<Gallery>
 )
 
 @Serializable
-data class Records(
+data class Gallery(
     val name: String?,
     val floor: Int
 )
