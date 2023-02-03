@@ -1,6 +1,6 @@
 package com.example.harvardartmuseumsproject.api
 
-import com.example.harvardartmuseumsproject.model.Gallery
+import com.example.harvardartmuseumsproject.model.Galleries
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.plugins.*
@@ -11,24 +11,24 @@ class KtorServiceImplementation(
     private val client: HttpClient
 ) : KtorService {
 
-    override suspend fun getListOfGalleriesOnEachLevel(level: Int): List<Gallery> {
+    override suspend fun getListOfGalleriesOnEachLevel(level: Int): Galleries? {
         return try {
-            listOf(client.get("https://api.harvardartmuseums.org/gallery?floor=$level&apikey=ed169f9e-e807-41ff-9da7-f44a69fd184e").body())
+            client.get("https://api.harvardartmuseums.org/gallery?floor=$level&apikey=ed169f9e-e807-41ff-9da7-f44a69fd184e").body<Galleries>()
         } catch (e: RedirectResponseException) {
             // 3xx - responses
             Timber.d("Error: ${e.response.status.description}")
-            emptyList()
+            null
         } catch (e: ClientRequestException) {
             // 4xx - responses
             Timber.d("Error: ${e.response.status.description}")
-            emptyList()
+            null
         } catch (e: ServerResponseException) {
             // 5xx - responses
             Timber.d("Error: ${e.response.status.description}")
-            emptyList()
+           null
         } catch (e: Exception) {
             Timber.d("Error: ${e.stackTraceToString()}")
-            emptyList()
+            null
         }
     }
 }

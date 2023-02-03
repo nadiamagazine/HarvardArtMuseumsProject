@@ -18,10 +18,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
-import com.example.harvardartmuseumsproject.model.Gallery
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import com.example.harvardartmuseumsproject.model.Galleries
+import com.example.harvardartmuseumsproject.model.Gallery
 import com.example.harvardartmuseumsproject.viewmodel.EachLevelViewModel
 
 @Composable
@@ -30,10 +30,7 @@ fun EachLevelGalleryListScreen(
     navController: NavController,
     viewModel: EachLevelViewModel = viewModel(
         factory = EachLevelViewModel.factory(level)
-// Instance of the viewMOdel
-              //  viewModel = ViewModelProvider(this, EachLevelViewModel.factory(level)).get(EachLevelViewModel::class.java)
-
-)
+    )
 ) {
     val viewState = viewModel.liveData.observeAsState()
 
@@ -42,16 +39,12 @@ fun EachLevelGalleryListScreen(
     } else {
         Column() {
             viewState.value?.let {
-                if (it.isNotEmpty()) {
-                    GalleryList(
-                        navController = navController,
-                        listOfGalleries = it
-                    )
-                } else {
-                    ErrorHandlingMessage()
-                }
+                GalleryList(
+                    navController = navController,
+                    listOfGalleries = it
+                )
 
-            }
+            } ?:  ErrorHandlingMessage()
         }
     }
 }
@@ -72,18 +65,17 @@ fun GalleryRow(
         shape = RoundedCornerShape(8.dp),
         elevation = 4.dp
     ) {
-        Row(
+        Column(
             Modifier
                 .padding(4.dp)
                 .fillMaxSize()
         ) {
-            gallery.records?.firstOrNull()?.name?.let {
-            Text(
-                        text = it,
-                        style = MaterialTheme.typography.body1,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
+                Text(
+                    text = gallery.name ?: "",
+                    style = MaterialTheme.typography.body1,
+                    fontWeight = FontWeight.Bold
+                )
+                Spacer(modifier = Modifier.height(16.dp))
             }
         }
     }
@@ -91,10 +83,10 @@ fun GalleryRow(
 @Composable
 fun GalleryList(
     navController: NavController,
-    listOfGalleries: List<Gallery>
+    listOfGalleries: Galleries
 ) {
     LazyColumn {
-        itemsIndexed(items = listOfGalleries) { index, item ->
+        itemsIndexed(items = listOfGalleries.records) { index, item ->
             GalleryRow(
                 navController = navController,
                 gallery = item
