@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.harvardartmuseumsproject.api.KtorService
+import com.example.harvardartmuseumsproject.database.GalleryDao
 import com.example.harvardartmuseumsproject.model.Galleries
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,7 +23,7 @@ class EachLevelViewModel(
 
     private fun getGallery(level: Int) = viewModelScope.launch {
         withContext(Dispatchers.IO) {
-            val listOfGalleries = KtorService.create().getListOfGalleriesOnEachLevel(level = level)
+            val listOfGalleries = KtorService.create().getListOfGalleriesOnEachLevel(level = level, limit = 0, offset = 40)
             _liveData.postValue(listOfGalleries)
         }
     }

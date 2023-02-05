@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.harvardartmuseumsproject.database.GalleryDao
 import com.example.harvardartmuseumsproject.ui.theme.HarvardArtMuseumsProjectTheme
 import timber.log.Timber
 
