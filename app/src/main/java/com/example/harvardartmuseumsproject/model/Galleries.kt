@@ -10,5 +10,17 @@ data class Galleries(
 @Serializable
 data class Gallery(
     val name: String?,
-    val floor: Int
+)
+
+@Serializable
+data class Groups(
+    val records: List<Group>
+)
+@Serializable
+data class Group(
+    val id: Int,
+    val name: String?,
+   val  baseImageUrl: String?,
+    val description: String?
+
 )

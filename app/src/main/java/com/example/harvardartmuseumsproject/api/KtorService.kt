@@ -1,6 +1,7 @@
 package com.example.harvardartmuseumsproject.api
 
 import com.example.harvardartmuseumsproject.model.Galleries
+import com.example.harvardartmuseumsproject.model.Groups
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.*
@@ -12,6 +13,8 @@ import kotlinx.serialization.json.Json
 interface KtorService {
 
     suspend fun getListOfGalleriesOnEachLevel(level: Int): Galleries?
+
+    suspend fun getListOfGroupsOfEachGallery(galleryGroupName: String): Groups?
 
     companion object {
 

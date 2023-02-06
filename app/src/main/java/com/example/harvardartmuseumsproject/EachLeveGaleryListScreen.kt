@@ -60,7 +60,7 @@ fun GalleryRow(
             .padding(8.dp)
             .background(MaterialTheme.colors.surface)
             .clickable {
-                TODO()
+                navController.navigate("GalleryListDetailsScreen/${gallery.name}")
             },
         shape = RoundedCornerShape(8.dp),
         elevation = 4.dp
