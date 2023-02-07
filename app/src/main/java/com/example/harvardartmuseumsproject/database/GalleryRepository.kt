@@ -1,14 +1,15 @@
 package com.example.harvardartmuseumsproject.database
 
 import androidx.lifecycle.LiveData
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
+import androidx.paging.*
 import com.example.harvardartmuseumsproject.model.Gallery
 
 class GalleryRepository(private val galleryDao: GalleryDao) {
 
-    fun getPagedGalleries(): LiveData<PagedList<Gallery>> {
-        val dataSourceFactory = galleryDao.getDataSourceFactory()
-        return LivePagedListBuilder(dataSourceFactory, 20).build()
+    fun getPagedGalleries(): LiveData<PagingData<Gallery>> {
+        return Pager(
+            config = PagingConfig(pageSize = 20),
+            pagingSourceFactory = { GalleryDataSource(galleryDao) }
+        ).liveData
     }
 }
