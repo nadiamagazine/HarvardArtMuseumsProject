@@ -11,5 +11,4 @@ class GalleryRepository(private val galleryDao: GalleryDao) {
             config = PagingConfig(pageSize = 20),
             pagingSourceFactory = { GalleryDataSource(galleryDao) }
         ).liveData
-    }
 }

@@ -20,13 +20,14 @@ abstract class GalleryDataSource(
                 offset = it
             )
         }
-        val nextKey = if (galleries?.isNotEmpty() == true) params.key?.plus(1) else null
 
-        return LoadResult.Page(
-            data = galleries,
-            prevKey = null,
-            nextKey = nextKey
-        )
+        if (galleries != null) {
+            return LoadResult.Page(
+                data = galleries,
+                prevKey = if (offset == 0) null else params.key?.minus(1),
+                nextKey = if (galleries.isEmpty()) null else params.key?.plus(1)
+            )
+        }
     }
 }
 
