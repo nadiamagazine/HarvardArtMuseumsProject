@@ -11,29 +11,29 @@ import kotlinx.coroutines.withContext
 
 
 class GalleryListDetailsViewModel(
-    galleryGroupName: String
+    name: String
 ) : ViewModel() {
 
     private var _liveData = MutableLiveData<Groups>()
     val liveData: LiveData<Groups> = _liveData
 
     init {
-        getListOfGroupsOfEachGallery(galleryGroupName)
+        getListOfGroupsOfEachGallery(name)
     }
 
-    private fun getListOfGroupsOfEachGallery(galleryGroupName: String) = viewModelScope.launch {
+    private fun getListOfGroupsOfEachGallery(name: String) = viewModelScope.launch {
         withContext(Dispatchers.IO) {
             val galleryGroup = KtorService.create()
-                .getListOfGroupsOfEachGallery(galleryGroupName = galleryGroupName)
+                .getListOfGroupsOfEachGallery(name = name)
             _liveData.postValue(galleryGroup)
         }
     }
 
     companion object {
-        fun factory(galleryGroupName: String): ViewModelProvider.Factory =
+        fun factory(name: String): ViewModelProvider.Factory =
             viewModelFactory {
                 initializer {
-                    GalleryListDetailsViewModel(galleryGroupName)
+                    GalleryListDetailsViewModel(name)
                 }
             }
     }

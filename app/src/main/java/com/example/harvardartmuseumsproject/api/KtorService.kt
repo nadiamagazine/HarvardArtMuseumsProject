@@ -14,7 +14,7 @@ interface KtorService {
 
     suspend fun getListOfGalleriesOnEachLevel(level: Int): Galleries?
 
-    suspend fun getListOfGroupsOfEachGallery(galleryGroupName: String): Groups?
+    suspend fun getListOfGroupsOfEachGallery(name: String): Groups?
 
     companion object {
 

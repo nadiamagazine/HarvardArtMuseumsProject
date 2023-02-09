@@ -9,31 +9,25 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.harvardartmuseumsproject.model.Galleries
-import com.example.harvardartmuseumsproject.model.Gallery
 import com.example.harvardartmuseumsproject.model.Group
 import com.example.harvardartmuseumsproject.model.Groups
-import com.example.harvardartmuseumsproject.viewmodel.EachLevelViewModel
 import com.example.harvardartmuseumsproject.viewmodel.GalleryListDetailsViewModel
 
 @Composable
 fun GalleryListDetailsScreen(
-    galleryGroupName: String,
+    name: String,
     navController: NavController,
     viewModel: GalleryListDetailsViewModel = androidx.lifecycle.viewmodel.compose.viewModel(
-        factory = GalleryListDetailsViewModel.factory(galleryGroupName)
+        factory = GalleryListDetailsViewModel.factory(name)
     )
 ) {
     val viewState = viewModel.liveData.observeAsState()

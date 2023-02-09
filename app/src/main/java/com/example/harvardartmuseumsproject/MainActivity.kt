@@ -53,7 +53,7 @@ class MainActivity : ComponentActivity() {
                         if (galleryGroupName != null) {
                             GalleryListDetailsScreen(
                                 navController = navController,
-                                galleryGroupName = galleryGroupName
+                                name = galleryGroupName
                             )
                         }
 

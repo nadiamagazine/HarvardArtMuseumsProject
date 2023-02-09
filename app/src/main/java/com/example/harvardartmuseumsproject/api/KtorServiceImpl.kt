@@ -35,9 +35,9 @@ class KtorServiceImplementation(
     }
 
 
-    override suspend fun getListOfGroupsOfEachGallery(galleryGroupName: String): Groups? {
+    override suspend fun getListOfGroupsOfEachGallery(name: String): Groups? {
         return try {
-            client.get("https://api.harvardartmuseums.org/group/?q=filters.values.name:$galleryGroupName&apikey=ed169f9e-e807-41ff-9da7-f44a69fd184e")
+            client.get("https://api.harvardartmuseums.org/group/?q=filters.values.name:$name&apikey=ed169f9e-e807-41ff-9da7-f44a69fd184e")
                 .body<Groups>()
         } catch (e: RedirectResponseException) {
             // 3xx - responses
