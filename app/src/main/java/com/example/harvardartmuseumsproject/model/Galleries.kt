@@ -9,10 +9,10 @@ data class Galleries(
     val records: List<Gallery>
 )
 
-@Entity
+@Entity (tableName = "galleries")
 @Serializable
 data class Gallery(
-    @PrimaryKey  val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int,
     val name: String?,
     val floor: Int
 )
