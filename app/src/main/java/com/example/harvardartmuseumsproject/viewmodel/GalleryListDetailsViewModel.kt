@@ -22,11 +22,10 @@ class GalleryListDetailsViewModel(
     }
 
     private fun getListOfGroupsOfEachGallery(name: String) = viewModelScope.launch {
-        withContext(Dispatchers.IO) {
-            val galleryGroup = KtorService.create()
-                .getListOfGroupsOfEachGallery(name = name)
-            _liveData.postValue(galleryGroup)
+        val galleryGroup = withContext(Dispatchers.IO) {
+            KtorService.create().getListOfGroupsOfEachGallery(name = name)
         }
+        _liveData.postValue(galleryGroup)
     }
 
     companion object {

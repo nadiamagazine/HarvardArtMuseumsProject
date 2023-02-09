@@ -7,6 +7,7 @@ import io.ktor.client.call.*
 import io.ktor.client.plugins.*
 import io.ktor.client.request.*
 import timber.log.Timber
+import java.net.URLEncoder
 
 class KtorServiceImplementation(
     private val client: HttpClient
@@ -37,7 +38,8 @@ class KtorServiceImplementation(
 
     override suspend fun getListOfGroupsOfEachGallery(name: String): Groups? {
         return try {
-            client.get("https://api.harvardartmuseums.org/group/?q=filters.values.name:$name&apikey=ed169f9e-e807-41ff-9da7-f44a69fd184e")
+            val encodedSearchQuery = URLEncoder.encode(name, "UTF-8")
+            client.get("https://api.harvardartmuseums.org/group/?q=filters.values.name:$encodedSearchQuery&apikey=ed169f9e-e807-41ff-9da7-f44a69fd184e")
                 .body<Groups>()
         } catch (e: RedirectResponseException) {
             // 3xx - responses
