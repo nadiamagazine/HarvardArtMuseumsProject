@@ -19,7 +19,7 @@ abstract class GalleryDataSource(
                 limit = PAGE_SIZE,
                 offset = it
             )
-        }
+            }
 
         if (galleries != null) {
             return LoadResult.Page(
