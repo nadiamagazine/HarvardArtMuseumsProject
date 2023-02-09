@@ -11,9 +11,9 @@ class KtorServiceImplementation(
     private val client: HttpClient
 ) : KtorService {
 
-    override suspend fun getListOfGalleriesOnEachLevel(level: Int, limit: Int, offset: Int): Galleries? {
+    override suspend fun getListOfGalleriesOnEachLevel(level: Int, totalrecords: Int, totalrecordsperquery: Int): Galleries? {
         return try {
-            client.get("https://api.harvestartmuseums.org/gallery?floor=$level&limit=$limit&offset=$offset&apikey=ed169f9e-e807-41ff-9da7-f44a69fd184e").body<Galleries>()
+            client.get("https://api.harvardmuseums.org/gallery?floor=$level&limit=$totalrecords&offset=$totalrecordsperquery&apikey=ed169f9e-e807-41ff-9da7-f44a69fd184e").body<Galleries>()
         } catch (e: RedirectResponseException) {
             // 3xx - responses
             Timber.d("Error: ${e.response.status.description}")

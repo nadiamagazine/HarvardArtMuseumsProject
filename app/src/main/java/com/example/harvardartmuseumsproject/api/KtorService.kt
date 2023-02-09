@@ -11,7 +11,7 @@ import kotlinx.serialization.json.Json
 
 interface KtorService {
 
-    suspend fun getListOfGalleriesOnEachLevel(level: Int, limit: Int, offset: Int): Galleries?
+    suspend fun getListOfGalleriesOnEachLevel(level: Int, totalrecords: Int, totalrecordsperquery: Int): Galleries?
 
     companion object {
 

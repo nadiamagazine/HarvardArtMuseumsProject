@@ -14,5 +14,6 @@ data class Galleries(
 data class Gallery(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val name: String?,
-    val floor: Int
+    val floor: Int,
+    val level: Int
 )
