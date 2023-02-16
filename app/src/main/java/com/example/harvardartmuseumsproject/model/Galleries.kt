@@ -1,26 +1,28 @@
 package com.example.harvardartmuseumsproject.model
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.SerialName
+
 
 @Serializable
 data class Galleries(
-    val records: List<Gallery>
+    @SerialName("records") val records: List<Gallery>
 )
 
 @Serializable
 data class Gallery(
-    val galleryid: String?,
-    val name: String?,
-    val contains: Groups
+    @SerialName("galleryid") val galleryId: String?,
+    @SerialName("name") val name: String?,
+    @SerialName("contains") val contains: Groups
 )
 
 @Serializable
 data class Groups(
-    val groups: List<Group>
+    @SerialName("groups") val groups: List<Group>
 )
 
 @Serializable
 data class Group(
-    val groupid: String?,
-    val name: String?
+    @SerialName("groupid") val groupId: String?,
+    @SerialName("name") val name: String?
 )
