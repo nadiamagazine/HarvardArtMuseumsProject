@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.harvardartmuseumsproject.database.GalleryDao
 import com.example.harvardartmuseumsproject.model.Galleries
 import com.example.harvardartmuseumsproject.model.Gallery
 import com.example.harvardartmuseumsproject.viewmodel.EachLevelViewModel
@@ -48,6 +49,7 @@ fun EachLevelGalleryListScreen(
         }
     }
 }
+
 
 @Composable
 fun GalleryRow(

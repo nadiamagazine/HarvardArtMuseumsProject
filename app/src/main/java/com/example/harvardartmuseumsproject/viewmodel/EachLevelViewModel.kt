@@ -22,7 +22,7 @@ class EachLevelViewModel(
 
     private fun getGallery(level: Int) = viewModelScope.launch {
         withContext(Dispatchers.IO) {
-            val listOfGalleries = KtorService.create().getListOfGalleriesOnEachLevel(level = level)
+            val listOfGalleries = KtorService.create().getListOfGalleriesOnEachLevel(level = level, totalrecords = 0, totalrecordsperquery = 40)
             _liveData.postValue(listOfGalleries)
         }
     }
