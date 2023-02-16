@@ -43,17 +43,17 @@ class MainActivity : ComponentActivity() {
                         }
 
                     }
-                    composable("GalleryListDetailsScreen/{name}",
+                    composable("GalleryListDetailsScreen/{id}",
                         arguments = listOf(
-                            navArgument("name")
+                            navArgument("id")
                             { type = NavType.StringType }
                         )
                     ) {
-                        val galleryGroupName = it.arguments?.getString("name")
-                        if (galleryGroupName != null) {
+                        val galleryId = it.arguments?.getString("id")
+                        if (galleryId != null) {
                             GalleryListDetailsScreen(
                                 navController = navController,
-                                name = galleryGroupName
+                                id = galleryId
                             )
                         }
 

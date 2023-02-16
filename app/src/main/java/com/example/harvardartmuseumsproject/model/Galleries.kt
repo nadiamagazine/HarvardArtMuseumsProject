@@ -9,19 +9,18 @@ data class Galleries(
 
 @Serializable
 data class Gallery(
+    val galleryid: String?,
     val name: String?,
+    val contains: Groups
 )
 
 @Serializable
 data class Groups(
-    val records: List<Group>
+    val groups: List<Group>
 )
 
 @Serializable
 data class Group(
-    val id: Int,
-    val name: String?,
-    val baseImageUrl: String?,
-    val description: String?
-
+    val groupid: String?,
+    val name: String?
 )

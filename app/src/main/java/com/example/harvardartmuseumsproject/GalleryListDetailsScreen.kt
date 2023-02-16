@@ -24,10 +24,10 @@ import com.example.harvardartmuseumsproject.viewmodel.GalleryListDetailsViewMode
 
 @Composable
 fun GalleryListDetailsScreen(
-    name: String,
+    id: String,
     navController: NavController,
     viewModel: GalleryListDetailsViewModel = androidx.lifecycle.viewmodel.compose.viewModel(
-        factory = GalleryListDetailsViewModel.factory(name)
+        factory = GalleryListDetailsViewModel.factory(id)
     )
 ) {
     val viewState = viewModel.liveData.observeAsState()
@@ -39,7 +39,7 @@ fun GalleryListDetailsScreen(
             viewState.value?.let {
                 GroupList(
                     navController = navController,
-                    listOfGroups = it
+                    listOfGroups = it.contains.groups
                 )
             } ?: ErrorHandlingMessage()
         }
@@ -84,21 +84,6 @@ fun GroupRow(
                         fontWeight = FontWeight.Bold
                     )
                 }
-                group.description?.let {
-                    Text(
-                        text = it,
-                        style = MaterialTheme.typography.body2,
-                        fontWeight = FontWeight.Normal
-                    )
-                }
-                group.baseImageUrl?.let {
-                    Text(
-                        text = it,
-                        style = MaterialTheme.typography.body2,
-                        fontWeight = FontWeight.Normal
-                    )
-                }
-
             }
         }
     }
@@ -107,10 +92,10 @@ fun GroupRow(
 @Composable
 fun GroupList(
     navController: NavController,
-    listOfGroups: Groups
+    listOfGroups: List<Group>
 ) {
     LazyColumn {
-        itemsIndexed(items = listOfGroups.records) { index, item ->
+        itemsIndexed(items = listOfGroups) { index, item ->
             GroupRow(
                 navController = navController,
                 group = item
