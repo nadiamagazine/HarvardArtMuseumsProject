@@ -5,9 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -18,8 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.harvardartmuseumsproject.model.Group
-import com.example.harvardartmuseumsproject.model.Groups
+import com.example.harvardartmuseumsproject.model.Object
 import com.example.harvardartmuseumsproject.viewmodel.GalleryListDetailsViewModel
 
 @Composable
@@ -35,29 +32,25 @@ fun GalleryListDetailsScreen(
     if (viewState.value == null) {
         ProgressIndicator()
     } else {
-        Column() {
             viewState.value?.let {
                 GroupList(
                     navController = navController,
-                    listOfGroups = it.contains.groups
+                    listOfObjects = it.records
                 )
             } ?: ErrorHandlingMessage()
-        }
     }
 }
 
 
 @Composable
 fun GroupRow(
-    group: Group,
+    obj: Object,
     navController: NavController
 ) {
-    val scrollState = rememberScrollState()
     Box(
         modifier = Modifier
             .background(Color.White)
-            .verticalScroll(scrollState)
-            .fillMaxSize()
+            .fillMaxWidth()
             .padding(bottom = 16.dp)
 
     ) {
@@ -77,10 +70,17 @@ fun GroupRow(
                     .padding(4.dp)
                     .fillMaxSize()
             ) {
-                group.name?.let {
+                obj.objectNumber.let {
                     Text(
                         text = it,
-                        style = MaterialTheme.typography.h3,
+                        style = MaterialTheme.typography.body1,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+                obj.description?.let {
+                    Text(
+                        text = it,
+                        style = MaterialTheme.typography.body1,
                         fontWeight = FontWeight.Bold
                     )
                 }
@@ -92,13 +92,13 @@ fun GroupRow(
 @Composable
 fun GroupList(
     navController: NavController,
-    listOfGroups: List<Group>
+    listOfObjects: List<Object>
 ) {
     LazyColumn {
-        itemsIndexed(items = listOfGroups) { index, item ->
+        itemsIndexed(items = listOfObjects) { index, item ->
             GroupRow(
                 navController = navController,
-                group = item
+                obj = item
             )
         }
     }

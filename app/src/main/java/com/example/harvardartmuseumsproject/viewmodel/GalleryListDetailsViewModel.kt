@@ -5,7 +5,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.harvardartmuseumsproject.api.KtorService
 import com.example.harvardartmuseumsproject.model.Gallery
-import com.example.harvardartmuseumsproject.model.Groups
+import com.example.harvardartmuseumsproject.model.Objects
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -15,18 +15,18 @@ class GalleryListDetailsViewModel(
     id: String
 ) : ViewModel() {
 
-    private var _liveData = MutableLiveData<Gallery>()
-    val liveData: LiveData<Gallery> = _liveData
+    private var _liveData = MutableLiveData<Objects>()
+    val liveData: LiveData<Objects> = _liveData
 
     init {
-        getListOfGroupsOfEachGallery(id)
+        getObjects(id)
     }
 
-    private fun getListOfGroupsOfEachGallery(id: String) = viewModelScope.launch {
-        val galleryGroup = withContext(Dispatchers.IO) {
-            KtorService.create().getListOfGroupsOfEachGallery(id = id)
+    private fun getObjects(id: String) = viewModelScope.launch {
+        val galleryObjects = withContext(Dispatchers.IO) {
+            KtorService.create().getObjects(galleryId = id)
         }
-        _liveData.postValue(galleryGroup)
+        _liveData.postValue(galleryObjects)
     }
 
     companion object {

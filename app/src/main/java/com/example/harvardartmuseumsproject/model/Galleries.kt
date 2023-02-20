@@ -6,7 +6,7 @@ import kotlinx.serialization.SerialName
 
 @Serializable
 data class Galleries(
-    @SerialName("records") val records: List<Gallery>
+    @SerialName("records") val records: List<GalleryRecord>
 )
 
 @Serializable
@@ -17,12 +17,30 @@ data class Gallery(
 )
 
 @Serializable
+data class GalleryRecord(
+    @SerialName("galleryid") val galleryId: String?,
+    @SerialName("name") val name: String?,
+    )
+
+@Serializable
 data class Groups(
-    @SerialName("groups") val groups: List<Group>
+    @SerialName("groups") val groups: List<GalleryGroup>
 )
 
 @Serializable
-data class Group(
+data class GalleryGroup(
     @SerialName("groupid") val groupId: String?,
     @SerialName("name") val name: String?
+)
+
+@Serializable
+data class Objects(
+    @SerialName("records") val records: List<Object>
+)
+
+@Serializable
+data class Object(
+    @SerialName("primaryimageurl") val primaryImageUrl: String?,
+    @SerialName("objectnumber") val objectNumber: String,
+    @SerialName("description") val description: String?,
 )
