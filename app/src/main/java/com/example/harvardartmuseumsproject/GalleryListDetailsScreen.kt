@@ -12,14 +12,11 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -41,12 +38,12 @@ fun GalleryListDetailsScreen(
     if (viewState.value == null) {
         ProgressIndicator()
     } else {
-            viewState.value?.let {
-                GroupList(
-                    navController = navController,
-                    listOfObjects = it.records
-                )
-            } ?: ErrorHandlingMessage()
+        viewState.value?.let {
+            GroupList(
+                navController = navController,
+                listOfObjects = it.records
+            )
+        } ?: ErrorHandlingMessage()
     }
 }
 
@@ -90,11 +87,18 @@ fun GroupRow(
                         contentDescription = null,
                         modifier = Modifier
                             .padding(8.dp)
-                            .size(100.dp)
+                            .size(300.dp)
                             .clip(RoundedCornerShape(corner = CornerSize(16.dp)))
                     )
                 } else {
-                    Text(text = "No image available)")
+                    Text(
+                        text = "No image available)",
+                        modifier = Modifier
+                            //    .align(Alignment.CenterStart)
+                            .padding(8.dp)
+                            .size(300.dp)
+                            .clip(RoundedCornerShape(corner = CornerSize(16.dp)))
+                    )
 //                    Image(
 //                        painter = painterResource(R.mipmap.ic_launcher),
 //                        contentDescription = null,
