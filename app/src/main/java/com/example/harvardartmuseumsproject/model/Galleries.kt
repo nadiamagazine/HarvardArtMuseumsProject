@@ -34,12 +34,12 @@ data class GalleryGroup(
 )
 
 @Serializable
-data class Objects(
-    @SerialName("records") val records: List<Object>
+data class ArtObjects(
+    @SerialName("records") val records: List<ArtObject>
 )
 
 @Serializable
-data class Object(
+data class ArtObject(
     @SerialName("primaryimageurl") val primaryImageUrl: String?,
     @SerialName("objectnumber") val objectNumber: String,
     @SerialName("description") val description: String?,

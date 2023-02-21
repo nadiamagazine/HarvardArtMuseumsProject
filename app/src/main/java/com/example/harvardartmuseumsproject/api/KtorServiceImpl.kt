@@ -2,7 +2,7 @@ package com.example.harvardartmuseumsproject.api
 
 import com.example.harvardartmuseumsproject.model.Galleries
 import com.example.harvardartmuseumsproject.model.Gallery
-import com.example.harvardartmuseumsproject.model.Objects
+import com.example.harvardartmuseumsproject.model.ArtObjects
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.plugins.*
@@ -58,10 +58,10 @@ class KtorServiceImplementation(
         }
     }
 
-    override suspend fun getObjects(galleryId: String): Objects? {
+    override suspend fun getObjects(galleryId: String): ArtObjects? {
         return try {
             client.get("https://api.harvardartmuseums.org/object?gallery=$galleryId&apikey=ed169f9e-e807-41ff-9da7-f44a69fd184e")
-                .body<Objects>()
+                .body<ArtObjects>()
         } catch (e: RedirectResponseException) {
             // 3xx - responses
             Timber.d("Error: ${e.response.status.description}")

@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.example.harvardartmuseumsproject.model.Object
+import com.example.harvardartmuseumsproject.model.ArtObject
 import com.example.harvardartmuseumsproject.viewmodel.GalleryListDetailsViewModel
 
 @Composable
@@ -50,7 +50,7 @@ fun GalleryListDetailsScreen(
 
 @Composable
 fun GroupRow(
-    obj: Object,
+    obj: ArtObject,
     navController: NavController
 ) {
     Box(
@@ -136,7 +136,7 @@ fun GroupRow(
 @Composable
 fun GroupList(
     navController: NavController,
-    listOfObjects: List<Object>
+    listOfObjects: List<ArtObject>
 ) {
     LazyColumn {
         itemsIndexed(items = listOfObjects) { index, item ->

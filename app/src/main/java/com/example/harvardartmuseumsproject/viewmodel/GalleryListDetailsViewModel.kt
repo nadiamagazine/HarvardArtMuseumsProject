@@ -4,8 +4,7 @@ import androidx.lifecycle.*
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.harvardartmuseumsproject.api.KtorService
-import com.example.harvardartmuseumsproject.model.Gallery
-import com.example.harvardartmuseumsproject.model.Objects
+import com.example.harvardartmuseumsproject.model.ArtObjects
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -15,8 +14,8 @@ class GalleryListDetailsViewModel(
     id: String
 ) : ViewModel() {
 
-    private var _liveData = MutableLiveData<Objects>()
-    val liveData: LiveData<Objects> = _liveData
+    private var _liveData = MutableLiveData<ArtObjects>()
+    val liveData: LiveData<ArtObjects> = _liveData
 
     init {
         getObjects(id)

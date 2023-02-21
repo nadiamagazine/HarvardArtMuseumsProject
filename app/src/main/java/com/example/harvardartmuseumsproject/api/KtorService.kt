@@ -2,8 +2,7 @@ package com.example.harvardartmuseumsproject.api
 
 import com.example.harvardartmuseumsproject.model.Galleries
 import com.example.harvardartmuseumsproject.model.Gallery
-import com.example.harvardartmuseumsproject.model.Groups
-import com.example.harvardartmuseumsproject.model.Objects
+import com.example.harvardartmuseumsproject.model.ArtObjects
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.*
@@ -18,7 +17,7 @@ interface KtorService {
 
     suspend fun getGallery(id: String): Gallery?
 
-    suspend fun getObjects(galleryId: String): Objects?
+    suspend fun getObjects(galleryId: String): ArtObjects?
 
     companion object {
 
