@@ -43,6 +43,22 @@ class MainActivity : ComponentActivity() {
                         }
 
                     }
+                    composable("GalleryListDetailsScreen/{id}",
+                        arguments = listOf(
+                            navArgument("id")
+                            { type = NavType.StringType }
+                        )
+                    ) {
+                        val galleryId = it.arguments?.getString("id")
+                        if (galleryId != null) {
+                            GalleryListDetailsScreen(
+                                navController = navController,
+                                id = galleryId
+                            )
+                        }
+
+                    }
+
                 }
             }
         }

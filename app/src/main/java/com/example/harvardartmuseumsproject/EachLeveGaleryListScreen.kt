@@ -22,6 +22,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.harvardartmuseumsproject.model.Galleries
 import com.example.harvardartmuseumsproject.model.Gallery
+import com.example.harvardartmuseumsproject.model.GalleryRecord
 import com.example.harvardartmuseumsproject.viewmodel.EachLevelViewModel
 
 @Composable
@@ -52,7 +53,7 @@ fun EachLevelGalleryListScreen(
 @Composable
 fun GalleryRow(
     navController: NavController,
-    gallery: Gallery
+    gallery: GalleryRecord
 ) {
     Card(
         modifier = Modifier
@@ -60,7 +61,7 @@ fun GalleryRow(
             .padding(8.dp)
             .background(MaterialTheme.colors.surface)
             .clickable {
-                TODO()
+                navController.navigate("GalleryListDetailsScreen/${gallery.galleryId}")
             },
         shape = RoundedCornerShape(8.dp),
         elevation = 4.dp
