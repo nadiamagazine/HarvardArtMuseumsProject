@@ -4,7 +4,6 @@ import androidx.lifecycle.*
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.harvardartmuseumsproject.api.KtorService
-import com.example.harvardartmuseumsproject.model.ArtObjects
 import com.example.harvardartmuseumsproject.model.FullSizeImage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,7 +22,7 @@ class FullSizeImageViewModel(
 
     private fun getImage(imageId: String) = viewModelScope.launch {
         val galleryImage = withContext(Dispatchers.IO) {
-            KtorService.create().getImage(imageId = imageId)
+            KtorService.create().getImages(imageId = imageId)
         }
         _liveData.postValue(galleryImage)
     }

@@ -40,12 +40,20 @@ data class ArtObjects(
 
 @Serializable
 data class ArtObject(
+    @SerialName("id") val imageId: String?,
     @SerialName("primaryimageurl") val primaryImageUrl: String?,
     @SerialName("objectnumber") val objectNumber: String,
     @SerialName("description") val description: String?,
-)
+
+    )
+
+//@Serializable
+//data class FullSizeImages(
+//    @SerialName("records") val images: List<FullSizeImage>
+//)
 
 @Serializable
 data class FullSizeImage(
-    @SerialName("primaryimageurl") val primaryImageUrl: String?,
+    @SerialName("imageid") val imageId: String?,
+    @SerialName("baseimageurl") val primaryImageUrl: String?,
 )

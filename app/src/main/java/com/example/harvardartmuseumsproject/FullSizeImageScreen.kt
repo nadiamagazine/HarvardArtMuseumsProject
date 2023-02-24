@@ -2,6 +2,8 @@ package com.example.harvardartmuseumsproject
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
@@ -32,7 +34,7 @@ fun FullSizeImageScreen(
         ProgressIndicator()
     } else {
         viewState.value?.let {
-            ImageScreen(
+           ImageScreen(
                 fullSizeImage = it,
                 navController = navController
             )
@@ -60,3 +62,18 @@ fun ImageScreen(
         )
     }
 }
+
+//@Composable
+//fun GroupList(
+//    navController: NavController,
+//    listOfObjects: List<FullSizeImage>
+//) {
+//    LazyColumn {
+//        itemsIndexed(items = listOfObjects) { index, item ->
+//           ImageScreen(
+//                navController = navController,
+//                fullSizeImage = item
+//            )
+//        }
+//    }
+//}

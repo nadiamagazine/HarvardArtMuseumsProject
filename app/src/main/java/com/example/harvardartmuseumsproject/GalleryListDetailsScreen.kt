@@ -66,7 +66,7 @@ fun GroupRow(
                 .padding(8.dp)
                 .background(MaterialTheme.colors.surface)
                 .clickable {
-                   navController.navigate("FullSizeImageScreen/${obj.primaryImageUrl}")
+                   navController.navigate("FullSizeImageScreen/${obj.imageId}")
                 },
             shape = RoundedCornerShape(8.dp),
             elevation = 4.dp
@@ -114,6 +114,13 @@ fun GroupRow(
                         .align(Alignment.CenterVertically)
                 ) {
                     obj.objectNumber.let {
+                        Text(
+                            text = it,
+                            style = MaterialTheme.typography.body1,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                    obj.imageId?.let {
                         Text(
                             text = it,
                             style = MaterialTheme.typography.body1,
