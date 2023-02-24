@@ -44,3 +44,8 @@ data class ArtObject(
     @SerialName("objectnumber") val objectNumber: String,
     @SerialName("description") val description: String?,
 )
+
+@Serializable
+data class FullSizeImage(
+    @SerialName("primaryimageurl") val primaryImageUrl: String?,
+)
