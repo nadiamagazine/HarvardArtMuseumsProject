@@ -3,7 +3,6 @@ package com.example.harvardartmuseumsproject.api
 import com.example.harvardartmuseumsproject.model.*
 import io.ktor.client.*
 import io.ktor.client.call.*
-import io.ktor.client.plugins.*
 import io.ktor.client.request.*
 import timber.log.Timber
 
@@ -32,15 +31,6 @@ class KtorServiceImplementation(private val client: HttpClient) : KtorService {
     private suspend fun <T> handleAPIRequest(block: suspend () -> T): T? {
         return try {
             block()
-        } catch (e: RedirectResponseException) {
-            Timber.d("Error: ${e.response.status.description}")
-            null
-        } catch (e: ClientRequestException) {
-            Timber.d("Error: ${e.response.status.description}")
-            null
-        } catch (e: ServerResponseException) {
-            Timber.d("Error: ${e.response.status.description}")
-            null
         } catch (e: Exception) {
             Timber.d("Error: ${e.stackTraceToString()}")
             null
