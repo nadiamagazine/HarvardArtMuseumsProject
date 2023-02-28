@@ -99,13 +99,6 @@ fun GroupRow(
                             .size(300.dp)
                             .clip(RoundedCornerShape(corner = CornerSize(16.dp)))
                     )
-//                    Image(
-//                        painter = painterResource(R.mipmap.ic_launcher),
-//                        contentDescription = null,
-//                        modifier = Modifier
-//                            .padding(8.dp)
-//                            .size(85.dp)
-//                            .clip(RoundedCornerShape(corner = CornerSize(16.dp))))
                 }
                 Column(
                     modifier = Modifier
