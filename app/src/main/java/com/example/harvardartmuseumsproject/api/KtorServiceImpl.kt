@@ -35,7 +35,6 @@ class KtorServiceImplementation(
         }
     }
 
-
     override suspend fun getGallery(id: String): Gallery? {
         return try {
             client.get("https://api.harvardartmuseums.org/gallery/$id?apikey=ed169f9e-e807-41ff-9da7-f44a69fd184e")
