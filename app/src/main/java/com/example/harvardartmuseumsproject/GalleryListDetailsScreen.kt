@@ -94,7 +94,6 @@ fun GroupRow(
                     Text(
                         text = "No image available)",
                         modifier = Modifier
-                            //    .align(Alignment.CenterStart)
                             .padding(8.dp)
                             .size(300.dp)
                             .clip(RoundedCornerShape(corner = CornerSize(16.dp)))
