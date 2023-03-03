@@ -66,7 +66,7 @@ fun GroupRow(
                 .padding(8.dp)
                 .background(MaterialTheme.colors.surface)
                 .clickable {
-                   navController.navigate("FullSizeImageScreen/${obj.imageId}")
+                   navController.navigate("FullSizeImageScreen/${obj.images.firstOrNull()?.imageid}")
                 },
             shape = RoundedCornerShape(8.dp),
             elevation = 4.dp

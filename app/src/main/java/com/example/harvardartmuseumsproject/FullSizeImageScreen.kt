@@ -1,8 +1,9 @@
 package com.example.harvardartmuseumsproject
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
@@ -12,14 +13,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import com.example.harvardartmuseumsproject.viewmodel.FullSizeImageViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.example.harvardartmuseumsproject.model.ArtObject
 import com.example.harvardartmuseumsproject.model.FullSizeImage
-import com.example.harvardartmuseumsproject.viewmodel.GalleryListDetailsViewModel
+import com.example.harvardartmuseumsproject.viewmodel.FullSizeImageViewModel
 
 
 @Composable
@@ -38,7 +37,6 @@ fun FullSizeImageScreen(
         viewState.value?.let {
            ImageScreen(
                 fullSizeImage = it,
-               secondImage = it,
                 navController = navController
             )
         } ?: ErrorHandlingMessage()
@@ -48,7 +46,6 @@ fun FullSizeImageScreen(
 @Composable
 fun ImageScreen(
     fullSizeImage: FullSizeImage,
-    secondImage: FullSizeImage,
     navController: NavController
 ) {
     Column(
@@ -63,32 +60,15 @@ fun ImageScreen(
                     .data(imageUrl)
                     .crossfade(true)
                     .build(),
-                // placeholder = painterResource(R.mipmap.ic_launcher),
                 contentDescription = null,
                 modifier = Modifier
                     .padding(8.dp)
-                    .size(300.dp)
+                    .fillMaxSize()
                     .clip(RoundedCornerShape(corner = CornerSize(16.dp)))
             )
         } else {
             Text(
                 text = "No image available)",
-                modifier = Modifier
-                    //    .align(Alignment.CenterStart)
-                    .padding(8.dp)
-                    .size(300.dp)
-                    .clip(RoundedCornerShape(corner = CornerSize(16.dp)))
-            )
-        }
-        val image12 = fullSizeImage.primaryImageUrl
-        if (image12 != null) {
-            AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(imageUrl)
-                    .crossfade(true)
-                    .build(),
-                // placeholder = painterResource(R.mipmap.ic_launcher),
-                contentDescription = null,
                 modifier = Modifier
                     .padding(8.dp)
                     .size(300.dp)
@@ -97,18 +77,3 @@ fun ImageScreen(
         }
     }
 }
-
-//    @Composable
-//    fun ImageList(
-//        navController: NavController,
-//        listOfObjects: List<FullSizeImage>
-//    ) {
-//        LazyColumn {
-//            itemsIndexed(items = listOfObjects) { index, item ->
-//                ImageScreen(
-//                    navController = navController,
-//                    fullSizeImage = item
-//                )
-//            }
-//        }
-//    }
