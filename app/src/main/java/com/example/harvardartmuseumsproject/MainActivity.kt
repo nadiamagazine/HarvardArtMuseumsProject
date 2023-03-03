@@ -58,6 +58,19 @@ class MainActivity : ComponentActivity() {
                         }
 
                     }
+                    composable("FullSizeImageScreen/{imageId}",
+                    arguments = listOf(navArgument("imageId")
+                    { type = NavType.StringType }
+                    )
+                    ) {
+                        val imageId = it.arguments?.getString("imageId")
+                        if (imageId != null) {
+                            FullSizeImageScreen(
+                                navController = navController,
+                                imageId = imageId
+                            )
+                        }
+                    }
 
                 }
             }
