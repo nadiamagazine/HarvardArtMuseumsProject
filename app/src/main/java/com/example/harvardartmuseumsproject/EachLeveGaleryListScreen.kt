@@ -32,21 +32,27 @@ fun EachLevelGalleryListScreen(
         factory = EachLevelViewModel.factory(level)
     )
 ) {
-    val viewState = viewModel.liveData.observeAsState()
+    val viewState = viewModel.liveData.observeAsState(ScreenState.Loading)
 
-    if (viewState.value == null) {
-        ProgressIndicator()
-    } else {
-        Column() {
-            viewState.value?.let {
-                GalleryList(
-                    navController = navController,
-                    listOfGalleries = it
-                )
 
-            } ?:  ErrorHandlingMessage()
-        }
+    when (viewState) {
+        is ScreenState.Loading -> { ProgressIndicator() }
+        is ScreenState.Success<*> -> { GalleryList(navController = navController, listOfGalleries = ) }
+        is ScreenState.Error -> {ErrorHandlingMessage()}
     }
+//    if (viewState.value == null) {
+//        ProgressIndicator()
+//    } else {
+//        Column() {
+//            viewState.value?.let {
+//                GalleryList(
+//                    navController = navController,
+//                    listOfGalleries = it
+//                )
+//
+//            } ?:  ErrorHandlingMessage()
+//        }
+//    }
 }
 
 @Composable

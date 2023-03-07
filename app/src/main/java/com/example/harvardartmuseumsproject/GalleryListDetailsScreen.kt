@@ -83,7 +83,6 @@ fun GroupRow(
                             .data(imageUrl)
                             .crossfade(true)
                             .build(),
-                        // placeholder = painterResource(R.mipmap.ic_launcher),
                         contentDescription = null,
                         modifier = Modifier
                             .padding(8.dp)
