@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.harvardartmuseumsproject.navigation.ScreenRoute
 import com.example.harvardartmuseumsproject.ui.theme.HarvardArtMuseumsProjectTheme
 import timber.log.Timber
 
@@ -18,15 +19,15 @@ class MainActivity : ComponentActivity() {
             HarvardArtMuseumsProjectTheme {
                 val navController = rememberNavController()
                 NavHost(
-                    navController = navController,
-                    startDestination = "HomeScreen"
+                    navController,
+                    startDestination = ScreenRoute.Home
                 ) {
-                    composable("HomeScreen") {
-                        HomeScreen(navController = navController)
+                    composable(route = ScreenRoute.Home) {
+                        HomeScreen(navController)
                     }
-                    composable("ExhibitionScreen") {
+                    composable(route = ScreenRoute.Exhibition) {
                         ExhibitionScreen(
-                            navController = navController)
+                            navController)
                     }
                     composable("EachLevelGalleryListScreen/{level}",
                         arguments = listOf(

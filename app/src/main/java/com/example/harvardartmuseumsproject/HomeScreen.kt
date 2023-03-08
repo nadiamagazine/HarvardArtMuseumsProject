@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
+import com.example.harvardartmuseumsproject.navigation.ScreenRoute
 
 @Composable
 fun HomeScreen(navController: NavController) {
@@ -39,7 +40,7 @@ fun HomeScreen(navController: NavController) {
         Button(
             onClick = {
                 navController.navigate(
-                    "ExhibitionScreen"
+                    ScreenRoute.Exhibition
                 )
             }
         )
