@@ -32,7 +32,7 @@ fun GalleryListDetailsScreen(
         factory = GalleryListDetailsViewModel.factory(id)
     )
 ) {
-    val viewState = viewModel.liveData.observeAsState()
+    val viewState = viewModel.screenState.observeAsState()
 
     when (val state = viewState.value) {
         is ScreenState.Loading -> {

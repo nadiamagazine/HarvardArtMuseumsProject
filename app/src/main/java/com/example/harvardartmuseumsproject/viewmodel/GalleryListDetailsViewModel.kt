@@ -15,22 +15,22 @@ class GalleryListDetailsViewModel(
     id: String
 ) : ViewModel() {
 
-    private var _liveData = MutableLiveData<ScreenState<ArtObjects>>(ScreenState.Loading)
-    val liveData: LiveData<ScreenState<ArtObjects>> = _liveData
+    private var _screenState = MutableLiveData<ScreenState<ArtObjects>>(ScreenState.Loading)
+    val screenState: LiveData<ScreenState<ArtObjects>> = _screenState
 
     init {
         getObjects(id)
     }
 
     private fun getObjects(id: String) = viewModelScope.launch {
-        _liveData.postValue(ScreenState.Loading)
+        _screenState.postValue(ScreenState.Loading)
         try {
             val galleryObjects = withContext(Dispatchers.IO) {
                 KtorService.create().getObjects(galleryId = id)
             }
-            _liveData.postValue(ScreenState.Success(galleryObjects as ArtObjects))
+            _screenState.postValue(ScreenState.Success(galleryObjects as ArtObjects))
         } catch (e: Exception) {
-            _liveData.postValue(ScreenState.Error(e.message ?: "Unknown error occurred."))
+            _screenState.postValue(ScreenState.Error(e.message ?: "Unknown error occurred."))
         }
     }
 
