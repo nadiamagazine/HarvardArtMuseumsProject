@@ -3,6 +3,7 @@ package com.example.harvardartmuseumsproject.viewmodel
 import androidx.lifecycle.*
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import com.example.harvardartmuseumsproject.ScreenState
 import com.example.harvardartmuseumsproject.api.KtorService
 import com.example.harvardartmuseumsproject.model.Galleries
 import kotlinx.coroutines.Dispatchers
@@ -13,17 +14,22 @@ class EachLevelViewModel(
     level: Int
 ) : ViewModel() {
 
-    private var _liveData = MutableLiveData<Galleries>()
-    val liveData: LiveData<Galleries> = _liveData
+    private val _screenState = MutableLiveData<ScreenState<Galleries>>()
+    val screenState: LiveData<ScreenState<Galleries>> = _screenState
 
     init {
         getGallery(level)
     }
 
     private fun getGallery(level: Int) = viewModelScope.launch {
-        withContext(Dispatchers.IO) {
-            val listOfGalleries = KtorService.create().getGalleries(level = level)
-            _liveData.postValue(listOfGalleries)
+        _screenState.postValue(ScreenState.Loading)
+        try {
+            withContext(Dispatchers.IO) {
+                val listOfGalleries = KtorService.create().getGalleries(level = level)
+                _screenState.postValue(ScreenState.Success(listOfGalleries as Galleries))
+            }
+        } catch (e: Exception) {
+            _screenState.postValue(ScreenState.Error(e.message ?: "Unknown error occurred"))
         }
     }
 
