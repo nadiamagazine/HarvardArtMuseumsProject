@@ -32,24 +32,31 @@ fun GalleryListDetailsScreen(
         factory = GalleryListDetailsViewModel.factory(id)
     )
 ) {
-    val viewState = viewModel.liveData.observeAsState()
+    val viewState = viewModel.screenState.observeAsState()
 
-    if (viewState.value == null) {
-        ProgressIndicator()
-    } else {
-        viewState.value?.let {
-            GroupList(
-               onImageClick = { artObject ->
-                   artObject.images.firstOrNull()?.imageid.let { imageId ->
-                       if (imageId != null) {
-                           onNavigateToFullSizeImageScreen(imageId)
-                       }
+    when (val state = viewState.value) {
+        is ScreenState.Loading -> {
+            ProgressIndicator()
+        }
+        is ScreenState.Success -> {
+            state.data.let {
+                GroupList(
+                    onImageClick = { artObject ->
+                        artObject.images.firstOrNull()?.imageid.let { imageId ->
+                            if (imageId != null) {
+                                onNavigateToFullSizeImageScreen(imageId)
+                            }
 
-                   }
-               },
-                listOfObjects = it.records
-            )
-        } ?: ErrorHandlingMessage()
+                        }
+                    },
+                    listOfObjects = it.records
+                )
+            } ?: ErrorHandlingMessage()
+        }
+        is ScreenState.Error -> {
+            ErrorHandlingMessage()
+        }
+        else -> {}
     }
 }
 

@@ -11,6 +11,7 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,13 +33,15 @@ fun EachLevelGalleryListScreen(
 
         )
 ) {
-    val viewState = viewModel.liveData.observeAsState()
+    val viewState by viewModel.screenState.observeAsState(ScreenState.Loading)
 
-    if (viewState.value == null) {
-        ProgressIndicator()
-    } else {
-        Column {
-            viewState.value?.let { galleries ->
+    when (viewState) {
+        is ScreenState.Loading -> {
+            ProgressIndicator()
+        }
+        is ScreenState.Success -> {
+            val galleries = (viewState as ScreenState.Success<Galleries>).data
+            Column {
                 GalleryList(
                     onGalleryClick = { gallery ->
                         gallery.galleryId?.let { galleryId ->
@@ -47,7 +50,10 @@ fun EachLevelGalleryListScreen(
                     },
                     galleries = galleries
                 )
-            } ?: ErrorHandlingMessage()
+            }
+        }
+        is ScreenState.Error -> {
+            ErrorHandlingMessage()
         }
     }
 }
