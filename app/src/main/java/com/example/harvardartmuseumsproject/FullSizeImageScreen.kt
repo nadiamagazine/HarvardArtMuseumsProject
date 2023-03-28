@@ -27,16 +27,16 @@ fun FullSizeImageScreen(
         factory = FullSizeImageViewModel.factory(imageId)
     )
 ) {
-    val viewState = viewModel.liveData.observeAsState()
+    val viewState = viewModel.screenState.observeAsState()
 
-    if (viewState.value == null) {
-        ProgressIndicator()
-    } else {
-        viewState.value?.let {
-           ImageScreen(
-                fullSizeImage = it
-            )
-        } ?: ErrorHandlingMessage()
+    when (viewState.value) {
+        ScreenState.Loading -> ProgressIndicator()
+        is ScreenState.Success -> {
+            val fullSizeImage = (viewState.value as ScreenState.Success<FullSizeImage>).data
+            ImageScreen(fullSizeImage = fullSizeImage)
+        }
+        is ScreenState.Error -> ErrorHandlingMessage()
+        null -> ErrorHandlingMessage()
     }
 }
 
