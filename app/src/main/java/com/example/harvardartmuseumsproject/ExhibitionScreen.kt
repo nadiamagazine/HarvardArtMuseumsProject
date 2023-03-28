@@ -13,11 +13,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 
 @Composable
 fun ExhibitionScreen(
-    navController: NavController
+    onNavigateToGalleryScreen: (Int) -> Unit = {}
 ) {
     val levels = listOf("Lower level", "Level 1", "Level 2", "Level 3", "Level 4", "Level 5")
 
@@ -26,16 +25,16 @@ fun ExhibitionScreen(
             .background(MaterialTheme.colors.background)
             .fillMaxSize()
     ) {
-        levels.forEachIndexed { index, level ->
+        levels.forEachIndexed { level, index ->
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp)
                     .background(MaterialTheme.colors.surface)
-                    .clickable { navController.navigate("EachLevelGalleryListScreen/$index") }
+                    .clickable { onNavigateToGalleryScreen(level) }
             ) {
                 Text(
-                    text = AnnotatedString(level),
+                    text = AnnotatedString(index),
                     modifier = Modifier
                         .padding(20.dp)
                 )
@@ -52,4 +51,3 @@ fun ExhibitionScreen(
         )
     }
 }
-

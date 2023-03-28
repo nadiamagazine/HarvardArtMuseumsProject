@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -15,11 +14,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.navigation.NavController
-import com.example.harvardartmuseumsproject.navigation.ScreenRoute
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(
+    onNavigateToExhibitionScreen: () -> Unit = {}
+) {
 
     Column(
         modifier = Modifier
@@ -39,9 +38,7 @@ fun HomeScreen(navController: NavController) {
         )
         Button(
             onClick = {
-                navController.navigate(
-                    ScreenRoute.Exhibition
-                )
+                onNavigateToExhibitionScreen()
             }
         )
         {

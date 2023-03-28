@@ -3,79 +3,97 @@ package com.example.harvardartmuseumsproject
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.navigation.NavType
+import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.example.harvardartmuseumsproject.navigation.ScreenRoute
 import com.example.harvardartmuseumsproject.ui.theme.HarvardArtMuseumsProjectTheme
-import timber.log.Timber
+import com.example.harvardartmuseumsproject.viewmodel.EachLevelViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val navController = rememberNavController()
             HarvardArtMuseumsProjectTheme {
-                val navController = rememberNavController()
                 NavHost(
-                    navController,
-                    startDestination = ScreenRoute.Home
+                    navController = navController,
+                    startDestination = "galleriesGraph"
                 ) {
-                    composable(route = ScreenRoute.Home) {
-                        HomeScreen(navController)
-                    }
-                    composable(route = ScreenRoute.Exhibition) {
-                        ExhibitionScreen(
-                            navController)
-                    }
-                    composable("EachLevelGalleryListScreen/{level}",
-                        arguments = listOf(
-                            navArgument("level")
-                            { type = NavType.IntType }
-                        )
-                    ) {
-                        val level = it.arguments?.getInt("level")
-                        if (level != null) {
-                            EachLevelGalleryListScreen(
-                                navController = navController,
-                                level = level
-                            )
-                        }
-
-                    }
-                    composable("GalleryListDetailsScreen/{id}",
-                        arguments = listOf(
-                            navArgument("id")
-                            { type = NavType.StringType }
-                        )
-                    ) {
-                        val galleryId = it.arguments?.getString("id")
-                        if (galleryId != null) {
-                            GalleryListDetailsScreen(
-                                navController = navController,
-                                id = galleryId
-                            )
-                        }
-
-                    }
-                    composable("FullSizeImageScreen/{imageId}",
-                    arguments = listOf(navArgument("imageId")
-                    { type = NavType.StringType }
-                    )
-                    ) {
-                        val imageId = it.arguments?.getString("imageId")
-                        if (imageId != null) {
-                            FullSizeImageScreen(
-                                navController = navController,
-                                imageId = imageId
-                            )
-                        }
-                    }
-
+                    galleriesGraph(navController)
                 }
             }
         }
-        Timber.plant(Timber.DebugTree())
+    }
+}
+
+fun NavGraphBuilder.galleriesGraph(navController: NavController) {
+    navigation(startDestination = ScreenRoute.Home.route, route = "galleriesGraph") {
+        composable(ScreenRoute.Home.route) {
+            HomeScreen(
+                onNavigateToExhibitionScreen =
+                {
+                    navController.navigate(
+                        ScreenRoute.Exhibition.route
+                    )
+                }
+            )
+        }
+        composable(
+            route = ScreenRoute.Exhibition.route,
+        ) {
+            ExhibitionScreen(
+                onNavigateToGalleryScreen = { level ->
+                    navController.navigate("${ScreenRoute.Gallery.route}/$level")
+                }
+            )
+        }
+        composable(
+            route = "${ScreenRoute.Gallery.route}/{level}",
+            arguments = listOf(
+                navArgument("level") { type = NavType.IntType }
+            )
+        ) { backStackEntry ->
+            val level = backStackEntry.arguments?.getInt("level")
+            if (level != null) {
+                EachLevelGalleryListScreen(
+                    level = level,
+                    onNavigateToGalleryDetailsScreen = { galleryId ->
+                        navController.navigate("${ScreenRoute.GalleryDetails.route}/$galleryId")
+                    },
+                    viewModel = EachLevelViewModel(level = level)
+                )
+            }
+        }
+        composable("${ScreenRoute.GalleryDetails.route}/{id}",
+            arguments = listOf(
+                navArgument("id") { type = NavType.StringType }
+            )
+        ) { backStackEntry ->
+            val galleryId = backStackEntry.arguments?.getString("id")
+            if (galleryId != null) {
+                GalleryListDetailsScreen(
+                    id = galleryId,
+                    onNavigateToFullSizeImageScreen = { imageId ->
+                        navController.navigate("${ScreenRoute.FullSizeImage.route}/$imageId")
+                    }
+                )
+            }
+
+        }
+        composable("${ScreenRoute.FullSizeImage.route}/{imageId}",
+            arguments = listOf(navArgument("imageId")
+            { type = NavType.StringType }
+            )
+        ) {
+            val imageId = it.arguments?.getString("imageId")
+            if (imageId != null) {
+                FullSizeImageScreen(
+                    imageId = imageId
+                )
+            }
+        }
+
     }
 }

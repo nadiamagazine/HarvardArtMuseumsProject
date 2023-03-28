@@ -14,7 +14,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.harvardartmuseumsproject.model.FullSizeImage
@@ -24,7 +23,6 @@ import com.example.harvardartmuseumsproject.viewmodel.FullSizeImageViewModel
 @Composable
 fun FullSizeImageScreen(
     imageId: String,
-    navController: NavController,
     viewModel: FullSizeImageViewModel = viewModel(
         factory = FullSizeImageViewModel.factory(imageId)
     )
@@ -36,8 +34,7 @@ fun FullSizeImageScreen(
     } else {
         viewState.value?.let {
            ImageScreen(
-                fullSizeImage = it,
-                navController = navController
+                fullSizeImage = it
             )
         } ?: ErrorHandlingMessage()
     }
@@ -45,8 +42,7 @@ fun FullSizeImageScreen(
 
 @Composable
 fun ImageScreen(
-    fullSizeImage: FullSizeImage,
-    navController: NavController
+    fullSizeImage: FullSizeImage
 ) {
     Column(
         Modifier
