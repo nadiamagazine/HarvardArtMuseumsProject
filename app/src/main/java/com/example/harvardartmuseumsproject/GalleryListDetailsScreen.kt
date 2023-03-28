@@ -19,7 +19,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.harvardartmuseumsproject.model.ArtObject
@@ -28,7 +27,7 @@ import com.example.harvardartmuseumsproject.viewmodel.GalleryListDetailsViewMode
 @Composable
 fun GalleryListDetailsScreen(
     id: String,
-    navController: NavController,
+    onNavigateToFullSizeImageScreen: (String) -> Unit = {},
     viewModel: GalleryListDetailsViewModel = androidx.lifecycle.viewmodel.compose.viewModel(
         factory = GalleryListDetailsViewModel.factory(id)
     )
@@ -40,7 +39,14 @@ fun GalleryListDetailsScreen(
     } else {
         viewState.value?.let {
             GroupList(
-                navController = navController,
+               onImageClick = { artObject ->
+                   artObject.images.firstOrNull()?.imageid.let { imageId ->
+                       if (imageId != null) {
+                           onNavigateToFullSizeImageScreen(imageId)
+                       }
+
+                   }
+               },
                 listOfObjects = it.records
             )
         } ?: ErrorHandlingMessage()
@@ -50,8 +56,8 @@ fun GalleryListDetailsScreen(
 
 @Composable
 fun GroupRow(
-    obj: ArtObject,
-    navController: NavController
+    artObject: ArtObject,
+    onImageClick: (ArtObject) -> Unit = {}
 ) {
     Box(
         modifier = Modifier
@@ -66,7 +72,7 @@ fun GroupRow(
                 .padding(8.dp)
                 .background(MaterialTheme.colors.surface)
                 .clickable {
-                   navController.navigate("FullSizeImageScreen/${obj.images.firstOrNull()?.imageid}")
+                    onImageClick(artObject)
                 },
             shape = RoundedCornerShape(8.dp),
             elevation = 4.dp
@@ -76,14 +82,13 @@ fun GroupRow(
                     .padding(4.dp)
                     .fillMaxSize()
             ) {
-                val imageUrl = obj.primaryImageUrl
+                val imageUrl = artObject.primaryImageUrl
                 if (imageUrl != null) {
                     AsyncImage(
                         model = ImageRequest.Builder(LocalContext.current)
                             .data(imageUrl)
                             .crossfade(true)
                             .build(),
-                        // placeholder = painterResource(R.mipmap.ic_launcher),
                         contentDescription = null,
                         modifier = Modifier
                             .padding(8.dp)
@@ -105,21 +110,21 @@ fun GroupRow(
                         .fillMaxSize()
                         .align(Alignment.CenterVertically)
                 ) {
-                    obj.objectNumber.let {
+                    artObject.objectNumber.let {
                         Text(
                             text = it,
                             style = MaterialTheme.typography.body1,
                             fontWeight = FontWeight.Bold
                         )
                     }
-                    obj.imageId?.let {
+                    artObject.imageId?.let {
                         Text(
                             text = it,
                             style = MaterialTheme.typography.body1,
                             fontWeight = FontWeight.Bold
                         )
                     }
-                    obj.description?.let {
+                    artObject.description?.let {
                         Text(
                             text = it,
                             style = MaterialTheme.typography.body1,
@@ -134,14 +139,14 @@ fun GroupRow(
 
 @Composable
 fun GroupList(
-    navController: NavController,
+    onImageClick: (ArtObject) -> Unit = {},
     listOfObjects: List<ArtObject>
 ) {
     LazyColumn {
-        itemsIndexed(items = listOfObjects) { index, item ->
+        itemsIndexed(items = listOfObjects) { _, image ->
             GroupRow(
-                navController = navController,
-                obj = item
+                artObject = image,
+                onImageClick = { onImageClick(image) }
             )
         }
     }

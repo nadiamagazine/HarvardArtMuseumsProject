@@ -19,7 +19,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import com.example.harvardartmuseumsproject.model.Galleries
 import com.example.harvardartmuseumsproject.model.GalleryRecord
 import com.example.harvardartmuseumsproject.viewmodel.EachLevelViewModel
@@ -27,31 +26,35 @@ import com.example.harvardartmuseumsproject.viewmodel.EachLevelViewModel
 @Composable
 fun EachLevelGalleryListScreen(
     level: Int,
-    navController: NavController,
+    onNavigateToGalleryDetailsScreen: (String) -> Unit = {},
     viewModel: EachLevelViewModel = viewModel(
-        factory = EachLevelViewModel.factory(level)
-    )
+        factory = EachLevelViewModel.factory(level),
+
+        )
 ) {
     val viewState = viewModel.liveData.observeAsState()
 
     if (viewState.value == null) {
         ProgressIndicator()
     } else {
-        Column() {
-            viewState.value?.let {
+        Column {
+            viewState.value?.let { galleries ->
                 GalleryList(
-                    navController = navController,
-                    listOfGalleries = it
+                    onGalleryClick = { gallery ->
+                        gallery.galleryId?.let { galleryId ->
+                            onNavigateToGalleryDetailsScreen(galleryId)
+                        }
+                    },
+                    galleries = galleries
                 )
-
-            } ?:  ErrorHandlingMessage()
+            } ?: ErrorHandlingMessage()
         }
     }
 }
 
 @Composable
 fun GalleryRow(
-    navController: NavController,
+    onGalleryClick: (GalleryRecord) -> Unit = {},
     gallery: GalleryRecord
 ) {
     Card(
@@ -60,7 +63,7 @@ fun GalleryRow(
             .padding(8.dp)
             .background(MaterialTheme.colors.surface)
             .clickable {
-                navController.navigate("GalleryListDetailsScreen/${gallery.galleryId}")
+                onGalleryClick(gallery)
             },
         shape = RoundedCornerShape(8.dp),
         elevation = 4.dp
@@ -70,31 +73,30 @@ fun GalleryRow(
                 .padding(4.dp)
                 .fillMaxSize()
         ) {
-                Text(
-                    text = gallery.name ?: "",
-                    style = MaterialTheme.typography.body1,
-                    fontWeight = FontWeight.Bold
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-            }
-        }
-    }
-
-@Composable
-fun GalleryList(
-    navController: NavController,
-    listOfGalleries: Galleries
-) {
-    LazyColumn {
-        itemsIndexed(items = listOfGalleries.records) { index, item ->
-            GalleryRow(
-                navController = navController,
-                gallery = item
+            Text(
+                text = gallery.name ?: "",
+                style = MaterialTheme.typography.body1,
+                fontWeight = FontWeight.Bold
             )
+            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
 
+@Composable
+fun GalleryList(
+    onGalleryClick: (GalleryRecord) -> Unit = {},
+    galleries: Galleries
+) {
+    LazyColumn {
+        itemsIndexed(items = galleries.records) { _, gallery ->
+            GalleryRow(
+                onGalleryClick = { onGalleryClick(gallery) },
+                gallery = gallery
+            )
+        }
+    }
+}
 @Composable
 fun ProgressIndicator() {
     Box(
